@@ -1,0 +1,101 @@
+package com.wechatweb.demo;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.Null;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
+
+
+
+@RestController
+@RequestMapping("/wxAuth")
+public class WxLoginController {
+
+    final private String appID = "wx08988f2cc05f7950";
+    final private String appsecret = "80ca16ce870d1ff3c661e65c74522bcc";
+    final private String host = "http://sunshijie1998.eicp.net";
+
+
+    @RequestMapping("/checkToken")
+    public void checkToken(HttpServletRequest request,HttpServletResponse response){
+        //token验证代码段
+        try{
+            System.out.println("请求已到达，开始校验token");
+            if (request.getParameter("signature") != null) {
+                String signature = request.getParameter("signature");
+                String timestamp = request.getParameter("timestamp");
+                String nonce = request.getParameter("nonce");
+                String echostr = request.getParameter("echostr");
+                System.out.println(signature);
+                System.out.println(timestamp);
+                System.out.println(nonce);
+                System.out.println(echostr);
+
+                if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+                    System.out.println("数据源为微信后台，将echostr["+echostr+"]返回！");
+                    response.getOutputStream().println(echostr);
+                }
+            }
+        }catch (IOException e){
+            System.out.println("校验出错");
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/login")
+    public void wxLogin(HttpServletResponse response) throws IOException {
+        //请求获取code的回调地址
+        //用线上环境的域名或者用内网穿透，不能用ip
+        String callBack = host+"/wxAuth/callBack";
+
+        //请求地址
+        String url = "https://open.weixin.qq.com/connect/oauth2/authorize" +
+                "?appid=" + appID +
+                "&redirect_uri=" + URLEncoder.encode(callBack) +
+                "&response_type=code" +
+                "&scope=snsapi_userinfo" +
+                "&state=STATE#wechat_redirect";
+        //重定向
+        response.sendRedirect(url);
+    }
+
+    //	回调方法
+    @RequestMapping("/callBack")
+    public void wxCallBack(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String code = request.getParameter("code");
+
+        //获取access_token
+        String url = "https://api.weixin.qq.com/sns/oauth2/access_token" +
+                "?appid=" + appID +
+                "&secret=" + appsecret +
+                "&code=" + code +
+                "&grant_type=authorization_code";
+
+        String result = HttpClientUtil.doGet(url);
+
+        System.out.println("请求获取access_token:" + result);
+        //返回结果的json对象
+        JSONObject resultObject = JSON.parseObject(result);
+
+        //请求获取userInfo
+        String infoUrl = "https://api.weixin.qq.com/sns/userinfo" +
+                "?access_token=" + resultObject.getString("access_token") +
+                "&openid=" + resultObject.getString("openid") +
+                "&lang=zh_CN";
+
+        String resultInfo = HttpClientUtil.doGet(infoUrl);
+
+        //此时已获取到userInfo，再根据业务进行处理
+        System.out.println("请求获取userInfo:" + resultInfo);
+
+    }
+}

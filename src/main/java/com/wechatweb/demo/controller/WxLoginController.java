@@ -1,24 +1,31 @@
-package com.wechatweb.demo;
+package com.wechatweb.demo.controller;
 
+import cc.hidoctor.bus.core.utils.JSONUtil;
+import cc.hidoctor.bus.core.utils.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.wechatweb.demo.SignUtil;
+import com.wechatweb.demo.entity.WechatUserInfo;
+import com.wechatweb.demo.mapper.WechatUserMapper;
+import com.wechatweb.demo.utils.HttpClientUtil;
+import jdk.nashorn.internal.ir.annotations.Reference;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.Null;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLEncoder;
 
 
-
+@Slf4j
 @RestController
 @RequestMapping("/wxAuth")
 public class WxLoginController {
+
+    @Reference
+    WechatUserMapper wechatUserMapper;
 
     final private String appID = "wx08988f2cc05f7950";
     final private String appsecret = "80ca16ce870d1ff3c661e65c74522bcc";
@@ -29,24 +36,23 @@ public class WxLoginController {
     public void checkToken(HttpServletRequest request,HttpServletResponse response){
         //token验证代码段
         try{
-            System.out.println("请求已到达，开始校验token");
+            log.info("请求已到达，开始校验token");
             if (request.getParameter("signature") != null) {
                 String signature = request.getParameter("signature");
                 String timestamp = request.getParameter("timestamp");
                 String nonce = request.getParameter("nonce");
                 String echostr = request.getParameter("echostr");
-                System.out.println(signature);
-                System.out.println(timestamp);
-                System.out.println(nonce);
-                System.out.println(echostr);
-
+                log.info(signature);
+                log.info(timestamp);
+                log.info(nonce);
+                log.info(echostr);
                 if (SignUtil.checkSignature(signature, timestamp, nonce)) {
-                    System.out.println("数据源为微信后台，将echostr["+echostr+"]返回！");
+                    log.info("数据源为微信后台，将echostr[{}]返回！",echostr);
                     response.getOutputStream().println(echostr);
                 }
             }
         }catch (IOException e){
-            System.out.println("校验出错");
+            log.error("校验出错");
             e.printStackTrace();
         }
     }
@@ -72,7 +78,6 @@ public class WxLoginController {
     @RequestMapping("/callBack")
     public void wxCallBack(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String code = request.getParameter("code");
-
         //获取access_token
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token" +
                 "?appid=" + appID +
@@ -81,8 +86,7 @@ public class WxLoginController {
                 "&grant_type=authorization_code";
 
         String result = HttpClientUtil.doGet(url);
-
-        System.out.println("请求获取access_token:" + result);
+        log.info("请求获取access_token:{}", result);
         //返回结果的json对象
         JSONObject resultObject = JSON.parseObject(result);
 
@@ -95,7 +99,11 @@ public class WxLoginController {
         String resultInfo = HttpClientUtil.doGet(infoUrl);
 
         //此时已获取到userInfo，再根据业务进行处理
-        System.out.println("请求获取userInfo:" + resultInfo);
-
+        log.info("请求获取userInfo:{}", resultInfo);
+        if (StringUtil.isNotEmpty(resultInfo)){
+            WechatUserInfo userInfo = JSONUtil.toObject(resultInfo, WechatUserInfo.class);
+            JSON.parseObject(result, WechatUserInfo.class);
+            wechatUserMapper.insertSelective(userInfo);
+        }
     }
 }

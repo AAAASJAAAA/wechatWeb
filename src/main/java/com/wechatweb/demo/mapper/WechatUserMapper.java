@@ -1,7 +1,10 @@
 package com.wechatweb.demo.mapper;
 
-import cc.hidoctor.bus.base.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wechatweb.demo.entity.WechatUserInfo;
+import org.springframework.stereotype.Component;
 
-public interface WechatUserMapper extends BaseMapper {
-
+@Component
+public interface WechatUserMapper extends BaseMapper<WechatUserInfo> {
+    int listCount();
 }

@@ -1,15 +1,15 @@
 package com.wechatweb.demo.controller;
 
-import cc.hidoctor.bus.core.utils.JSONUtil;
-import cc.hidoctor.bus.core.utils.StringUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
+import com.mysql.cj.util.StringUtils;
 import com.wechatweb.demo.SignUtil;
 import com.wechatweb.demo.entity.WechatUserInfo;
-import com.wechatweb.demo.mapper.WechatUserMapper;
+import com.wechatweb.demo.service.WechatUserInfoService;
 import com.wechatweb.demo.utils.HttpClientUtil;
-import jdk.nashorn.internal.ir.annotations.Reference;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +23,9 @@ import java.net.URLEncoder;
 @RestController
 @RequestMapping("/wxAuth")
 public class WxLoginController {
+    @Autowired
+    WechatUserInfoService wechatUserInfoService;
 
-    @Reference
-    WechatUserMapper wechatUserMapper;
 
     final private String appID = "wx08988f2cc05f7950";
     final private String appsecret = "80ca16ce870d1ff3c661e65c74522bcc";
@@ -100,10 +100,9 @@ public class WxLoginController {
 
         //此时已获取到userInfo，再根据业务进行处理
         log.info("请求获取userInfo:{}", resultInfo);
-        if (StringUtil.isNotEmpty(resultInfo)){
-            WechatUserInfo userInfo = JSONUtil.toObject(resultInfo, WechatUserInfo.class);
-            JSON.parseObject(result, WechatUserInfo.class);
-            wechatUserMapper.insertSelective(userInfo);
+        WechatUserInfo user = JSON.parseObject(resultInfo, WechatUserInfo.class);
+        if (ObjectUtils.isEmpty(wechatUserInfoService.selectUserInfoById(user.getOpenid()))){
+            wechatUserInfoService.insertUserInfo(user);
         }
     }
 }

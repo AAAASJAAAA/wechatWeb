@@ -1,16 +1,19 @@
 package com.wechatweb.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import javax.persistence.Table;
 
 @Data
-@Table(name = "WechatUserInfo")
-public class WechatUserInfo {
+@TableName(value = "wechat_user_info")
+public class WechatUserInfo{
+
     //公众号分配微信ID
+    @TableId(value = "openid")
     private String openid;
 
     //微信名
-    private String nikename;
+    private String nickname;
 
     private String sex;
 

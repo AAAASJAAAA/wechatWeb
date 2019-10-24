@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no" />
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+/*订单状态*/
+.state_box{ height:43px; position:relative}
+.state{ float:left; width:50%; line-height:43px; color:#65646b; font-size:14px; text-align:center}
+.blue_block{ width:50%; position:absolute; left:0; bottom:0; height:2px; background-color:#01aff0;}
+.move_box{ width:100%; text-align:center; padding-top:100px;}
+.move_box img{ width:80px; height:80px; margin:auto}
+.move_box p{ font-size:16px; color:#9A9A9A; padding-top:16px; padding-bottom:16px;}
+.move_box button{ width:80px; height:30px; background:#01AEF0; color:#fff; border-radius:5px; font-size:18px;}
+</style>
+</head>
+<!--/************************************************************
+ *																*
+ * 						      极资源							*
+ *                        www.junphp.com							*
+ *       		  努力创建完善、持续更新插件以及模板			*
+ * 																*
+**************************************************************-->
+<body style="background-color: #f9f9f9;">
+<!--header顶部标题-->
+<div class="header">我的订单
+	<div class="header_left" onclick="window.history.go(-1)"><img src="images/return.png"></div>
+</div>
+<!--订单状态-->
+<div class="state_box">
+    <div class="state">进行中</div>
+    <div class="state">已完成</div>
+    <div class="blue_block"></div>
+    <div class=" border_bottom"></div>
+</div>
+<!--订单信息-->
+<div class="move_box">
+	<img src="images/order-none.fw.png">
+    <p>您暂时没有相关的订单</p>
+    <button>去逛逛</button>
+</div>
+
+<script>
+$(".state:eq(0)").click(
+	function(){
+		$(".blue_block").animate({left:'0%'})
+		
+		}
+)
+$(".state:eq(1)").click(
+	function(){
+		$(".blue_block").animate({left:'50%'})
+		
+		}
+)
+
+</script>
+</body>
+</html>
+

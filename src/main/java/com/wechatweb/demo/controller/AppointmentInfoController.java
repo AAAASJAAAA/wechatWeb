@@ -77,4 +77,17 @@ public class AppointmentInfoController {
             return "取消失败，请联系管理员！";
         }
     }
+
+    //预约完成
+    @RequestMapping(value = "/finished", method = RequestMethod.POST)
+    @ResponseBody
+    public String finished(AppointmentInfo entity) {
+        try {
+            appointmentInfoService.finished(entity);
+            return "执行成功";
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return "执行成功，请联系管理员！";
+        }
+    }
 }

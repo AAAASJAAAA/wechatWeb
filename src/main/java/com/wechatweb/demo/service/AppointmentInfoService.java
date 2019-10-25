@@ -31,4 +31,10 @@ public class AppointmentInfoService {
         entity.setStatus(Constant.APPOINTMENT_STATUS_CANCLLED);
         mapper.updateById(entity);
     }
+
+    //预约上门完成
+    public void finished(AppointmentInfo entity){
+        entity.setStatus(Constant.APPOINTMENT_STATUS_FINISHED);
+        mapper.updateById(entity);
+    }
 }

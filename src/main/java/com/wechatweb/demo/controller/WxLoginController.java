@@ -3,15 +3,15 @@ package com.wechatweb.demo.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import com.mysql.cj.util.StringUtils;
 import com.wechatweb.demo.SignUtil;
 import com.wechatweb.demo.entity.WechatUserInfo;
 import com.wechatweb.demo.service.WechatUserInfoService;
 import com.wechatweb.demo.utils.HttpClientUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.net.URLEncoder;
 
 
 @Slf4j
-@RestController
+@Controller
 @RequestMapping("/wxAuth")
 public class WxLoginController {
     @Autowired
@@ -33,6 +33,7 @@ public class WxLoginController {
 
 
     @RequestMapping("/checkToken")
+    @ResponseBody
     public void checkToken(HttpServletRequest request,HttpServletResponse response){
         //token验证代码段
         try{
@@ -58,6 +59,7 @@ public class WxLoginController {
     }
 
     @RequestMapping("/login")
+    @ResponseBody
     public void wxLogin(HttpServletResponse response) throws IOException {
         //请求获取code的回调地址
         //用线上环境的域名或者用内网穿透，不能用ip
@@ -76,7 +78,7 @@ public class WxLoginController {
 
     //	回调方法
     @RequestMapping("/callBack")
-    public void wxCallBack(HttpServletRequest request,HttpServletResponse response) throws IOException {
+    public String wxCallBack(HttpServletRequest request,HttpServletResponse response) throws IOException {
         String code = request.getParameter("code");
         //获取access_token
         String url = "https://api.weixin.qq.com/sns/oauth2/access_token" +
@@ -104,5 +106,6 @@ public class WxLoginController {
         if (ObjectUtils.isEmpty(wechatUserInfoService.selectUserInfoById(user.getOpenid()))){
             wechatUserInfoService.insertUserInfo(user);
         }
+        return "redirect:/"+"?openid=" + user.getOpenid();
     }
 }

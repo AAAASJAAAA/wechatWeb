@@ -1,8 +1,11 @@
 package com.wechatweb.demo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
+import javax.persistence.Column;
 
 @Data
 @TableName(value = "appointment_info")
@@ -20,17 +23,17 @@ public class AppointmentInfo {
     private String address;
 
     //客户电话
-    private String phone_number;
+    private String phone;
 
     //客户身份证号
-    private String china_id;
+    private String chinaid;
 
     //预约时间
-    private String appointment_time;
+    private String appointmenttime;
 
     //0-未完成 1-已完成
     private String status;
 
     //创建时间
-    private Long created_time;
+    private Long createdtime;
 }

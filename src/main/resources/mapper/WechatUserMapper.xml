@@ -4,4 +4,8 @@
     <select id="listCount" resultType="Integer">
       select count(*) from wechat_user_info;
     </select>
+
+    <select id="findUserInfo" parameterType="java.lang.String" resultType="com.wechatweb.demo.entity.WechatUserInfo">
+      select * from wechat_user_info where openid = '${_parameter}';
+    </select>
 </mapper>

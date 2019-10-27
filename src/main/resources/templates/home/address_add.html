@@ -1,8 +1,8 @@
 <!doctype html>
 <html>
 <head>
-<script src="js/jquery.js"></script>
-<link href="css/css.css" rel="stylesheet" type="text/css">
+<script src="home/js/jquery.js"></script>
+<link href="home/css/css.css" rel="stylesheet" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta name="format-detection" content="telephone=no" />
 <meta charset="utf-8">
@@ -12,46 +12,46 @@
 .column_box input{ line-height:46px; color:#191919; font-size:14px; float:left; margin-left:12px;}
 </style>
 </head>
-<!--/************************************************************
- *																*
- * 						      极资源							*
- *                        www.junphp.com							*
- *       		  努力创建完善、持续更新插件以及模板			*
- * 																*
-**************************************************************-->
 <body style="background-color: #f9f9f9;">
 <!--header顶部标题-->
 <div class="header">添加服务地址
-	<div class="header_left" onclick="window.history.go(-1)"><img src="images/return.png"></div>
+	<div class="header_left" onclick="window.history.go(-1)"><img src="home/images/return.png"></div>
 </div>
-<!--column搜索小区-->
-<div class="column_box" onclick="document.location='address_search.html';">
-	<div class="border_top"></div>
-	<div class="column_img"><img src="images/adrress.png"></div>
-    <p>搜索小区</p>
-    <div class="next"><img src="images/arrow.png"></div>
-    <div class="border_bottom"></div>
-</div>
+<!--&lt;!&ndash;column搜索小区&ndash;&gt;-->
+<!--<div class="column_box" onclick="document.location='address_search.html';">-->
+<!--	<div class="border_top"></div>-->
+<!--	<div class="column_img"><img src="home/images/adrress.png"></div>-->
+<!--    <p>搜索小区</p>-->
+<!--    <div class="next"><img src="home/images/arrow.png"></div>-->
+<!--    <div class="border_bottom"></div>-->
+<!--</div>-->
 <!--column详细地址-->
 <div class="column_box">
-	<div class="column_img"><img src="images/adrress_2.png"></div>
-    <input placeholder="详细地址，如xx号楼xx单元xx室"></input>
+	<div class="column_img"><img src="home/images/adrress_2.png"></div>
+    <input placeholder="详细地址，如xx小区xx号楼xx单元xx室"></input>
     <div class="border_bottom"></div>
 </div>
 <!--acreage面积-->
 
 <!--column联系人-->
 <div class="column_box">
-	<div class="column_img"><img src="images/people.png"></div>
+	<div class="column_img"><img src="home/images/people.png"></div>
     <input placeholder="联系人"></input>
     <div class="border_bottom"></div>
 </div>
 <!--column电话-->
 <div class="column_box">
-	<div class="column_img"><img src="images/phone.png"></div>
+	<div class="column_img"><img src="home/images/phone.png"></div>
     <input placeholder="联系电话" type="number"></input>
     <div class="border_bottom"></div>
 </div>
+<!--column身份证-->
+<div class="column_box">
+    <div class="column_img"><img src="home/images/phone.png"></div>
+    <input placeholder="身份证"></input>
+    <div class="border_bottom"></div>
+</div>
+
 <!--confirm确认添加-->
 	<div class="confirm">确认添加</div>
 <script>

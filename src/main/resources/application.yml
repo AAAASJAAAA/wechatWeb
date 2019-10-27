@@ -14,7 +14,10 @@ spring:
     prefix: classpath:/templates/
     suffix: .html
     cash: false
-
+  devtools:
+    restart:
+      enabled: true
+#spring.devtools.restart.enabled: true
 
 #设置自己启动的端口
 server:

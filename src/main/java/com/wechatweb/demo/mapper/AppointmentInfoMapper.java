@@ -9,6 +9,5 @@ import java.util.List;
 
 @Component
 public interface AppointmentInfoMapper extends BaseMapper<AppointmentInfo> {
-
-    List<AppointmentInfo> selectListByOpenId(String openid);
+    List<AppointmentInfo> selectListByOpenId(AppointmentInfo entity);
 }

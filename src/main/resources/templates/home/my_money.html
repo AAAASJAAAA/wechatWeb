@@ -1,0 +1,46 @@
+?<!doctype html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no" />
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+/*我的钱包*/
+.problem{ height:46px; padding-left:4%; padding-right:4%; position:relative; background-color:#fff;}
+.problem h1{ float:left; line-height:46px; color:#65646b;}
+.problem span{ position:absolute; right:4%; top:13px; margin-right:20px; color:#E90000;}
+</style>
+</head>
+<!--/************************************************************
+ *																*
+ * 						      极资源							*
+ *                        www.junphp.com							*
+ *       		  努力创建完善、持续更新插件以及模板			*
+ * 																*
+**************************************************************-->
+<body style="background-color: #f9f9f9;">
+<!--header顶部标题-->
+<div class="header">我的钱包
+	<div class="header_left" onClick="window.history.go(-1)"><img src="images/return.png"></div>
+</div>
+<!--问题列表-->
+<div class="problem" onClick="document.location='money.html'">
+	<h1>余额</h1>
+    <span>￥500</span>
+    <div class="next"><img src="images/arrow.png"></div>
+    <div class="border_bottom"></div>
+</div>
+<div class="problem" onclick="document.location='coupon.html';">
+	<h1>优惠券</h1>
+    <div class="next"><img src="images/arrow.png"></div>
+    <div class="border_bottom"></div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
+

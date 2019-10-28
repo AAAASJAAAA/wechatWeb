@@ -21,4 +21,10 @@ public class WechatUserInfoService{
     public WechatUserInfo selectUserInfoById(String id) {
         return mapper.selectById(id);
     }
+
+    //查找用户信息
+    public WechatUserInfo findUserInfo(WechatUserInfo entity) {
+        String openid = entity.getOpenid();
+        return mapper.findUserInfo(openid);
+    }
 }

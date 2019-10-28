@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no" />
+<title>无标题文档</title>
+<style>
+/*基本信息or评价*/
+.information_btn,.evaluate_btn{ height:38px; width:50%; line-height:38px; color:#65646b; text-align:center; float:left; font-size:14px;}
+.blue_block{ width:50%; height:2px; background-color:#01aff0; position:absolute; left:0; bottom:0;}
+.move{ width:200%; position:relative; left:0;}
+.move_box{ width:100%; position:relative; left:0; overflow:hidden}
+/*基本信息*/
+.information{ height:210px; width:50%; position:relative; left:0; background-color:#fff; padding-top:7px; box-sizing:border-box; float:left}
+.information h1{ width:20%; line-height:27px; color:#65646b; font-size:14px; float:left; margin-left:4%;}
+.information p{ width:72%; line-height:27px; color:#191919; font-size:14px; float:left;}
+.information img{ width:18px; height:auto; margin-top:5px;}
+/*evaluate评价表*/
+.evaluate_box{ float:left; width:50%;}
+.evaluate{ height:64px; position:relative; background-color:#fff; padding-left:4%; padding-top:9px; box-sizing:border-box}
+.evaluate h1{ line-height:23px; color:#191919; font-size:12px; float:left}
+.evaluate h2{ line-height:23px; color:#65646b; margin-left:14%; font-size:12px;}
+.evaluate h3{ line-height:24px; color:#191919; font-size:14px;}
+.evaluate p{ position:absolute; right:4%; top:0; line-height:39px; color:#65646b;}
+</style>
+</head>
+<!--/************************************************************
+ *																*
+ * 						      极资源							*
+ *                        www.junphp.com							*
+ *       		  努力创建完善、持续更新插件以及模板			*
+ * 																*
+**************************************************************-->
+<body style="background-color: #f9f9f9;">
+<!--header顶部标题-->
+<div class="header">保洁师详情
+	<div class="header_left" onclick="window.history.go(-1)"><img src="images/return.png"></div>
+</div>
+<!--阿姨信息-->
+<div class="waiter_box">
+	<div class="border_top"></div>
+	<div class="waiter_img"><img src=""></div>
+    <div class="waiter">
+    	<h1>阿姨</h1>
+        <h2>服务评价：
+        	<div class="star_box" style=" position:absolute; top:0; right:-85px; margin-top:0">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star_gray.png">
+            </div>
+        </h2>
+        <p>接单数：30单</p>
+    </div>
+    <p class="waiter_id">工号：370601001</p>
+    <div class="border_bottom"></div>
+</div>
+<!--基本信息or评价-->
+<div style="position:relative; height:38px;">
+    <div class="information_btn" style="color:#01aff0">基本信息</div>
+    <div class="evaluate_btn">评价</div>
+    <div class="blue_block"></div>
+    <div class="border_bottom"></div>
+</div>
+<div class="move_box">
+<div class="move">
+    <!--基本信息-->
+    <div class="information">
+        <h1>年龄</h1>
+        <p>39岁</p>
+        <h1>服务内容</h1>
+        <p>日常保洁</p>
+        <h1>工作年限</h1>
+        <p>3年</p>
+        <h1>自我评价</h1>
+        <p>本人从2012年从事家政行业，一直做日常保洁服务，接受过专业机构的培训，做事认真，有责任心。</p>
+        <h1>个人视频</h1>
+        <p><img src="images/video.png"></p>
+        <div style="width:50%;position:absolute; left:50%; top:7px">
+            <h1 style="width:40%; margin-left:0">户籍</h1>
+            <p style="width:60%">烟台市</p>
+        </div>
+        <div class="border_bottom"></div>
+    </div>
+    <!--evaluate评价表-->
+    <div class="evaluate_box">
+        <div class="evaluate">
+            <h1>用户名</h1>
+            <h2>2015-11-20&nbsp;&nbsp;&nbsp;&nbsp;10:25</h2>
+            <h3>打扫得很干净，下次还选这</h3>
+            <p>日常保洁</p>
+            <div class="border_bottom"></div>
+        </div>
+        <div class="evaluate">
+            <h1>用户名</h1>
+            <h2>2015-11-20&nbsp;&nbsp;&nbsp;&nbsp;10:25</h2>
+            <h3>打扫得很干净，下次还选这</h3>
+            <p>日常保洁</p>
+            <div class="border_bottom"></div>
+        </div>
+    </div>
+</div>
+</div>    
+<script>
+$(".evaluate_btn").click(
+	function(){
+		$(".blue_block").animate({left:"50%"});
+		$(".move").animate({left:'-100%'});
+		}
+)
+$(".information_btn").click(
+	function(){
+		$(".blue_block").animate({left:"0%"});
+		$(".move").animate({left:'0%'});
+		}
+)
+</script>
+</body>
+</html>

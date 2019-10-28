@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no" />
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+/*订单详情*/
+.order_title{ height:39px; line-height:39px; font-size:14px; color:#65646b; padding-left:4%;}
+.order{ background-color:#fff; position:relative; padding-left:4%; padding-right:4%;box-sizing:border-box}
+.order_line{ height:40px; line-height:40px;}
+.order_line h1{ line-height:40px; font-size:14px; color:#191919; float:left}
+.order_line p{ line-height:40px; font-size:14px; color:#191919; float:right}
+/*订单信息*/
+.order_msg{ background-color:#fff; position:relative; padding-left:4%; padding-right:4%; padding-top:9px; padding-bottom:9px; box-sizing:border-box}
+.msg_line h1{ line-height:26px; font-size:14px; color:#65646b; float:left; width:20%;}
+.msg_line p{ line-height:26px; font-size:14px; color:#191919; float:left; width:78%; margin-left:5px;}
+/*合计*/
+.total_box{padding-top:24px; height:168px; box-sizing:border-box}
+.total_box h1{ font-size:12px; text-align:center; line-height:18px; color:#65646b;}
+.total_box p{ font-size:22px; color:#c40000; text-align:center; line-height:33px;}
+</style>
+</head>
+<!--/************************************************************
+ *																*
+ * 						      极资源							*
+ *                        www.junphp.com							*
+ *       		  努力创建完善、持续更新插件以及模板			*
+ * 																*
+**************************************************************-->
+<body style="background-color: #f9f9f9;">
+<!--header顶部标题-->
+<div class="header">匹配成功
+	<div class="header_left"><img src="images/return.png"></div>
+</div>
+<!--阿姨信息-->
+<div class="waiter_box" onClick="document.location='waiter_details.html';">
+	<div class="border_top"></div>
+	<div class="waiter_img"><img src=""></div>
+    <div class="waiter">
+    	<h1>阿姨</h1>
+        <h2>服务评价：
+        	<div class="star_box" style=" position:absolute; top:0; right:-85px; margin-top:0">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star.png">
+                <img src="images/star_gray.png">
+            </div>
+        </h2>
+        <p>接单数：30单</p>
+    </div>
+    <p class="waiter_id">工号：370601001</p>
+    <div class="border_bottom"></div>
+</div>
+<!--订单信息-->
+<div class="order_title">订单信息</div>
+<div class="order_msg">
+	<div class="border_top"></div>
+    <div class="msg_line">
+    	<h1>订&nbsp;&nbsp;单&nbsp;&nbsp;号</h1>
+        <p>16010600001</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>服务时间</h1>
+        <p>2015-12-30&nbsp;&nbsp;&nbsp;&nbsp;16:30</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>服务地点</h1>
+        <p>烟台市开发区阳光花园11号楼1单元101室</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>联&nbsp;&nbsp;系&nbsp;&nbsp;人</h1>
+        <p>李欣欣&nbsp;&nbsp;15065033398</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>服务内容</h1>
+        <p>保洁(全套服务)</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>房屋面积</h1>
+        <p>90-140m2</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="msg_line">
+    	<h1>预计时间</h1>
+        <p>2小时</p>
+        <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="border_bottom"></div>
+</div>
+<!--订单详情-->
+<div class="order_title">保洁剂</div>
+<div class="order">
+	<div class="border_top"></div>
+    <div class="order_line">
+    	<h1>威猛先生</h1>
+        <p style=" color:#c40000">￥<span style=" font-size:16px;">38</span></p>
+    </div>
+    <div class="border_bottom"></div>
+</div>
+<!--合计-->
+<div class="total_box">
+	<h1>合计：</h1>
+    <p>￥<scan style="font-size:33px;">95</scan><scan style="font-size:19px;">.0</scan></p>
+</div>
+<!--confirm确认订单-->
+<div class="confirm_box">
+	<div class="confirm" style="background-color:#FF7F00">确认并支付订单</div>
+</div>
+<script>
+</script>
+</body>
+</html>
+

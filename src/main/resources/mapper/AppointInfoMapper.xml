@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wechatweb.demo.mapper.AppointmentInfoMapper">
+    <select id="selectListByOpenId" parameterType="com.wechatweb.demo.entity.AppointmentInfo" resultType="com.wechatweb.demo.entity.AppointmentInfo">
+        SELECT
+            a.*,
+            b.address,
+            b.name,
+            b.phonenumber,
+            b.chinaid
+        FROM
+            appointment_info a
+            LEFT JOIN address_info b ON b.id = a.addressid
+        WHERE
+            a.openid = '${openid}'
+            <if test="status != null and status != ''">
+                AND status = '#{status}'
+            </if>
+    </select>
+</mapper>

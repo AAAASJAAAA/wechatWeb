@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+<script src="js/jquery.js"></script>
+<link href="css/css.css" rel="stylesheet" type="text/css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="format-detection" content="telephone=no" />
+<title>保洁</title>
+<style>
+.table{ background-color:#fff; padding-left:4%; padding-right:4%; position:relative; padding-top:10px; padding-bottom:5px;}
+.table h3{color:#65646B; padding-bottom:5px;}
+.table span{ padding-left:10px;color:#191919}
+.table p{ color:#191919;padding-left:81px; padding-bottom:5px;}
+/*保洁剂*/
+.detergent{ position:fixed; width:100%; height:100%; top:0px; left:0px; z-index:2000; background:#fff;}
+.hot_title{height:20px; line-height:20px; color:#65646b; padding-left:14px; box-sizing:border-box; position:relative; font-size:14px; background-color:#f9f9f9;}
+.agentia_box{ width:100%; position:relative; float:left}
+.agentia{ height:75px; background-color:#fff; position:relative}
+.agentia img{ width:26px; height:26px;}
+.agentia label{ display:block;width:26px; height:26px;position:absolute; right:5%; top:14px;}
+.agentia_img{ width:47px; height:47px; margin-left:4%; background-color:#737cd9; float:left; margin-top:14px;}
+.agentia_text{ float:left; margin-left:13px;}
+.agentia_text h1{ font-size:14px; line-height:18px; color:#191919; margin-top:11px;}
+.agentia_text h2{ font-size:12px; line-height:16px; color:#65646b;}
+.agentia_text h3{ font-size:14px; line-height:18px; color:#c40000;}
+.reduce,.add{ width:20px; height:20px; position:absolute;right:14px;top:27px;}
+.amount{ width:20px; height:20px; position:absolute; right:14px; top:27px; color:#191919; line-height:20px; text-align:center}
+/*cart底部购物车*/
+.cart_box{ position:absolute; bottom:0; left:0; background-color:#f9f9f9; width:100%;}
+.cart_title{ padding-left:4%; line-height:33px; color:#191919; position:relative; background-color:#fff;}
+.cart_pro{ height:42px;}
+.cart_pro h1{ float:left; line-height:42px; margin-left:4%; color:#191919;}
+.cart_pro h2{ float:left; line-height:42px; margin-left:20%; color:#c40000; }
+.cart_pro img{ float:right; width:20px; height:auto; margin-top:11px;}
+.cart_pro p{ float:right; width:25px; height:20px; margin-top:11px; color:#191919; text-align:center}
+.cart{ height:47px; position:relative; margin-top:16px; background-color:#fff;}
+.cart img{ width:46px; height:46px; position:absolute; left:4%; bottom:17px;}
+.sure{ float:right; width:25%; height:47px; background-color:#FF7F00; color:white; line-height:47px; text-align:center; font-size:18px;}
+.cart p{ color:#c40000; font-size:18px; line-height:47px; float:right; margin-right:6px;}
+.cart h1{ color:#191919; font-size:14px; line-height:47px; float:right}
+.number{ position:absolute; left:4%; top:-15px; margin-left:34px; height:18px; width:18px; background-color:#c40000; border-radius:50%; line-height:18px; text-align:center; color:white; font-size:12px;}
+</style>
+</head>
+<!--/************************************************************
+ *																*
+ * 						      极资源							*
+ *                        www.junphp.com							*
+ *       		  努力创建完善、持续更新插件以及模板			*
+ * 																*
+**************************************************************-->
+<body style="background-color: #f9f9f9;">
+<!--header顶部标题-->
+<div class="header">确认订单
+	<div class="header_left" onclick="window.history.go(-1)"><img src="images/return.png"></div>
+</div>
+<!--column服务地址-->
+<div class="table" >
+	<div class="address">
+	<div class="border_top"></div>
+    	<h3>服务内容：<span>日常保洁</span></h3>
+        <h3 style=" position:absolute">服务地址：</h3>
+        <p style="">XX小区XX号楼XX单元101室&nbsp;&nbsp;&nbsp;&nbsp;<br>李欣欣&nbsp;&nbsp;&nbsp;&nbsp;15065421863</p>
+        <h3>房屋面积：<span>90㎡</span></h3>
+        <h3>服务时间：<span>2月2号&nbsp;&nbsp;&nbsp;8:30</span></h3>
+        
+    <div class="border_bottom"></div>
+</div>
+</div>
+
+<!--column推荐保洁剂-->
+<div class="column_box box" style="margin-top:14px;">
+	<div class="border_top"></div>
+	<div class="column_img"><img src="images/cleaning.png"></div>
+    <p>推荐保洁剂</p>
+    <div class="border_bottom" style=" width:92%; left:4%"></div>
+</div>
+<!--agentia保洁剂-->
+<div class="agentia_box">
+    <div class="agentia" id="ron1">
+    	<div class="agentia_img" onclick="document.location='WeiMeng.html';"></div>
+        <div class="agentia_text">
+            <h1>保洁剂名称</h1>
+            <h2>月售：20</h2>
+            <h3>￥25</h3>
+        </div>
+        <label for="check_1" class="lab">
+        	<img  class="checked" src="images/check.jpg" >
+            <input type="checkbox" id="check_1" style="display:none">
+        </label>
+        <div class="border_bottom" style=" width:92%; left:4%"></div>
+    </div>
+    <div class="agentia" style=" position:relative">
+    	<div class="agentia_img" onclick="document.location='WeiMeng.html';"></div>
+        <div class="agentia_text">
+            <h1>保洁剂名称</h1>
+            <h2>月售：20</h2>
+            <h3>￥25</h3>
+        </div>
+        <label for="check_2" class="lab">
+       		 <img  class="checked" src="images/check.jpg">
+             <input type="checkbox" id="check_2" style="display:none">
+        </label>
+        <div class="border_bottom"></div>
+    </div>
+</div>
+<!--底部购物车-->
+
+<div class="cart_box">
+    <div class="cart">
+        <div class="border_top"></div>
+        <div class="sure">选好了</div>
+        <p id="total">￥0</p>
+        <h1>合计：</h1>
+    </div>
+</div>
+</div>
+<script>
+var i=0;
+$(".checked").click(function(){
+	if(i==0){$(this).attr("src","images/checked.jpg");i=1}else{$(this).attr("src","images/check.jpg");i=0}
+	})
+</script>
+</body>
+</html>

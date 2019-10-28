@@ -9,11 +9,21 @@ spring:
     url: jdbc:mysql://rm-wz9utdf0ilyfd5j612o.mysql.rds.aliyuncs.com:3306/wechatweb?useUnicode=true&characterEncoding=utf8
     username: root
     password: sunSUN19980928
+  # 定位模板的目录
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cash: false
+  devtools:
+    restart:
+      enabled: true
+#spring.devtools.restart.enabled: true
 
 #设置自己启动的端口
 server:
   port: 5000
   address: 0.0.0.0
+
 
 #mybatis plus
 mybatis-plus:

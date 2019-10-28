@@ -64,7 +64,6 @@ public class WxLoginController {
         //请求获取code的回调地址
         //用线上环境的域名或者用内网穿透，不能用ip
         String callBack = host+"/wxAuth/callBack";
-
         //请求地址
         String url = "https://open.weixin.qq.com/connect/oauth2/authorize" +
                 "?appid=" + appID +

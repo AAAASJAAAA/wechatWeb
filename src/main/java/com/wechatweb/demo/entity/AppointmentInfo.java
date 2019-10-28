@@ -20,13 +20,13 @@ public class AppointmentInfo {
     private String name;
 
     //客户地址
-    private String address;
+    private String addressid;
 
-    //客户电话
-    private String phone;
-
-    //客户身份证号
-    private String chinaid;
+//    //客户电话
+//    private String phone;
+//
+//    //客户身份证号
+//    private String chinaid;
 
     //预约时间
     private String appointmenttime;

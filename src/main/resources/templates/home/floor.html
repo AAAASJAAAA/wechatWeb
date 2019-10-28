@@ -388,6 +388,7 @@
 <div id="column_box" class="column_box">
     <div class="column_img"><img src="home/images/adrress.png"></div>
     <p id="address">请选择服务地址</p>
+    <input id="addressId" type="hidden">
     <div class="next"><img src="home/images/arrow.png"></div>
     <div class="border_bottom"></div>
 </div>
@@ -404,7 +405,7 @@
 <!--选取地址后的服务地址，先隐藏，选取地址后显示-->
 <div class="address">
     <div class="border_top"></div>
-    <img src="images/adrress.png">
+    <img src="home/images/adrress.png">
     <div class="address_text">
         <h1>XX小区</h1>
         <h2>XX号楼XX单元101室&nbsp;&nbsp;&nbsp;&nbsp;李欣欣&nbsp;&nbsp;&nbsp;&nbsp;15065421863</h2>
@@ -569,6 +570,13 @@
         var r = window.location.search.substr(1).match(reg);
         if(r!=null)return  unescape(r[2]); return null;
     }
+    setInterval(function () {
+        var id = $("#addressId").val()
+        console.log(id)
+        if (id != '') {
+            $(".confirm").css("background-color", "#FF7F00")
+        }
+    }, 100)
 
     $().ready(function () {
         var address_id = GetQueryString('address_id')
@@ -584,7 +592,9 @@
                     id:GetQueryString('address_id')
                 },
                 success:function(formData){
+                    console.log(formData)
                     $("#address").html(formData.address);
+                    $("#addressId").val(formData.id)
                 },
                 error:function(){
                     alert('error'); //错误的处理
@@ -599,15 +609,6 @@
         function () {
             window.location.href="/address?callback="+window.location.pathname;
     })
-
-    //选择窗户、地板、皮具等的面积
-    // setInterval(function(){
-    // 	var number=parseInt(document.getElementById("number").value);//找到number输入框转化为数字
-    // 	var   cost=parseInt(document.getElementById("cost").innerHTML);//找到cost总价格转化为数字
-    // 	document.getElementById("cost").innerHTML=+number*35;//总价格变动
-    // 	if(isNaN(number)){document.getElementById("cost").innerHTML=0;}
-    // 	if(cost>0){$(".confirm").css("background-color","#FF7F00")}
-    // 	},100)
     //隐藏免责声明、资费介绍
     document.getElementById('black').style.display = "none";
     document.getElementById('statement').style.display = "none";

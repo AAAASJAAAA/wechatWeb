@@ -345,19 +345,24 @@
     </div>
 </div>
 <script>
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
 
-    $().ready(function(){
-        if(GetQueryString('openid') == null || $.cookie('openid') == "" || $.cookie('openid') == "null")
-        {
-            window.location.replace("/wxAuth/login");
-        }else{
-            $.cookie('openid', GetQueryString('openid'));
+    $().ready(function () {
+        // debugger;
+        if ($.cookie('openid') == null) {
+            if (GetQueryString('openid') == null) {
+                console.log("跳转验证")
+                window.location.replace("/wxAuth/login");
+
+            } else {
+                console.log("getOpenId")
+                $.cookie('openid', GetQueryString('openid'));
+            }
         }
     })
 

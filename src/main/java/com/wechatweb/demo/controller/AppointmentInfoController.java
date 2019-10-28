@@ -41,6 +41,8 @@ public class AppointmentInfoController {
     }
 
     //插入预约信息
+
+    //这边我要的是插入用户地址id 明白
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insertAppointmentInfo(AppointmentInfo entity) {
         try {

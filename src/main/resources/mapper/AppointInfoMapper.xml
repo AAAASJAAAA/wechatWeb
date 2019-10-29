@@ -11,10 +11,31 @@
         FROM
             appointment_info a
             LEFT JOIN address_info b ON b.id = a.addressid
-        WHERE
-            a.openid = '${openid}'
-            <if test="status != null and status != ''">
-                AND status = '#{status}'
+        <where>
+            <if test="openid != null and openid != ''">
+                AND a.openid = '${openid}'
             </if>
+            <if test="status != null and status != ''">
+                AND a.status = '${status}'
+            </if>
+        </where>
+    </select>
+
+    <select id="findALLOrders" parameterType="com.wechatweb.demo.entity.AppointmentInfo" resultType="com.wechatweb.demo.entity.AppointmentInfo">
+        SELECT
+        a.*,
+        b.address,
+        b.name,
+        b.phonenumber,
+        b.chinaid
+        FROM
+        appointment_info a
+        LEFT JOIN address_info b ON b.id = a.addressid
+        <where>
+            <if test="status != null and status != '' and openid != null and openid != ''">
+                AND a.openid = '${openid}'
+                AND a.status = '${status}'
+            </if>
+        </where>
     </select>
 </mapper>

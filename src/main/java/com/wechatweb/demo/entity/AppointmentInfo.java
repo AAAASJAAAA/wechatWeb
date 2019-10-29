@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
-import javax.persistence.Column;
-
 @Data
 @TableName(value = "appointment_info")
 public class AppointmentInfo {
@@ -16,17 +14,8 @@ public class AppointmentInfo {
     //公众号分配微信ID
     private String openid;
 
-    //客户姓名
-    private String name;
-
     //客户地址
     private String addressid;
-
-//    //客户电话
-//    private String phone;
-//
-//    //客户身份证号
-//    private String chinaid;
 
     //预约时间
     private String appointmenttime;
@@ -36,4 +25,16 @@ public class AppointmentInfo {
 
     //创建时间
     private Long createdtime;
+
+    @TableField(exist = false)
+    //客户姓名
+    private String name;
+
+    @TableField(exist = false)
+    //客户电话
+    private String phonenumber;
+
+    @TableField(exist = false)
+    //客户身份证号
+    private String chinaid;
 }

@@ -67,4 +67,8 @@ public class AppointmentInfoService {
     public AddressInfo findAddressInfo(AddressInfo entity) {
         return addressInfoMapper.findAddressInfo(entity);
     }
+    //查找全部订单 status
+    public List<AppointmentInfo> findALLOrders(AppointmentInfo entity) {
+        return mapper.selectListByOpenId(entity);
+    }
 }

@@ -8,10 +8,8 @@ import com.wechatweb.demo.service.AppointmentInfoService;
 import com.wechatweb.demo.service.WechatUserInfoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Calendar;
@@ -40,16 +38,15 @@ public class AppointmentInfoController {
         return null;
     }
 
-    //插入预约信息
-
-    //这边我要的是插入用户地址id 明白
+    //插入预约信息（客户）
+    //这边我要的是插入用户地址id
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public String insertAppointmentInfo(AppointmentInfo entity) {
         try {
             UUID id = UUID.randomUUID();
             entity.setId(id.toString().replace("-",""));
             entity.setCreatedtime(Calendar.getInstance().getTimeInMillis());
-            entity.setStatus(Constant.APPOINTMENT_STATUS_NOT_FINISHED);
+            entity.setStatus(Constant.APPOINTMENT_STATUS_GOTED);
             appointmentInfoService.insertAppointmentInfo(entity);
             return "预约成功，客服将于10分钟之内联系您，谢谢配合。";
         } catch (Exception e) {
@@ -58,7 +55,7 @@ public class AppointmentInfoController {
         }
     }
 
-    //更改预约信息
+    //更改预约信息（客户&商家）
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String updateAppointmentInfo(AppointmentInfo entity) {
         try {
@@ -70,7 +67,7 @@ public class AppointmentInfoController {
         }
     }
 
-    //取消预约
+    //取消预约（客户）
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
     public String cancelAppointment(AppointmentInfo entity) {
         try {
@@ -82,7 +79,7 @@ public class AppointmentInfoController {
         }
     }
 
-    //预约完成
+    //预约完成（商家）
     @RequestMapping(value = "/finished", method = RequestMethod.POST)
     public String finished(AppointmentInfo entity) {
         try {
@@ -90,11 +87,35 @@ public class AppointmentInfoController {
             return "执行成功";
         } catch (Exception e) {
             log.error(e.getMessage());
-            return "执行成功，请联系管理员！";
+            return "执行失败，请联系管理员！";
         }
     }
 
-    //新增地址
+    //（商家）接单
+    @RequestMapping(value = "/ordered", method = RequestMethod.POST)
+    public String ordered(AppointmentInfo entity) {
+        try {
+            entity.setStatus(Constant.APPOINTMENT_STATUS_NOT_FINISHED);
+            appointmentInfoService.updateById(entity);
+            return "执行成功";
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return "执行失败，请联系管理员！";
+        }
+    }
+
+    //（商家）查询订单
+    @RequestMapping(value = "/findOrder", method = RequestMethod.POST)
+    public List findOrder(AppointmentInfo entity) {
+        try {
+            return appointmentInfoService.findALLOrders(entity);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return null;
+        }
+    }
+
+    //新增地址（客户）
     @RequestMapping(value = "/addAddress", method = RequestMethod.POST)
     public String addAddress(AddressInfo entity) {
         try {

@@ -68,32 +68,33 @@
 <!--header顶部标题-->
 <div class="header">服务地址
     <div class="header_left" onclick="window.history.go(-1)"><img src="home/images/return.png"></div>
-    <div class="header_right" id="edit" onClick="onedit()">编辑</div>
+<!--    <div class="header_right" id="edit" onClick="onedit()">编辑</div>-->
 </div>
 <!--address地址-->
 <div id="address">
 
-    <div class="address">
-        <div class="border_top"></div>
-        <h1>XX小区</h1>
-        <h2>联系人：<span>李欣欣</span>&nbsp;&nbsp;&nbsp;&nbsp;电话：<span>15065421863</span></h2>
-        <h2>地址：<span>XX号楼XX单元101室</span></h2>
-        <div class="delete">删除</div>
-        <div class="border_bottom"></div>
-    </div>
-    <div class="address">
-        <div class="border_top"></div>
-        <h1>XX小区</h1>
-        <h2>联系人：<span>李欣欣</span>&nbsp;&nbsp;&nbsp;&nbsp;电话：<span>15065421863</span></h2>
-        <h2>地址：<span>XX号楼XX单元101室</span></h2>
-        <div class="delete">删除</div>
-        <div class="border_bottom"></div>
-    </div>
+<!--    <div class="address">-->
+<!--        <div class="border_top"></div>-->
+<!--        <h1>XX小区</h1>-->
+<!--        <h2>联系人：<span>李欣欣</span>&nbsp;&nbsp;&nbsp;&nbsp;电话：<span>15065421863</span></h2>-->
+<!--        <h2>地址：<span>XX号楼XX单元101室</span></h2>-->
+<!--        <div class="delete">删除</div>-->
+<!--        <div class="border_bottom"></div>-->
+<!--    </div>-->
+<!--    <div class="address">-->
+<!--        <div class="border_top"></div>-->
+<!--        <h1>XX小区</h1>-->
+<!--        <h2>联系人：<span>李欣欣</span>&nbsp;&nbsp;&nbsp;&nbsp;电话：<span>15065421863</span></h2>-->
+<!--        <h2>地址：<span>XX号楼XX单元101室</span></h2>-->
+<!--        <div class="delete">删除</div>-->
+<!--        <div class="border_bottom"></div>-->
+<!--    </div>-->
 
 </div>
 
 <!--column添加新地址-->
-<div class="column_box" style="margin-top:14px;" onclick="document.location='address_add';">
+<!--<div class="column_box" style="margin-top:14px;" onclick="document.location='address_add';">-->
+<div class="column_box" style="margin-top:14px;">
     <div class="border_top"></div>
     <div class="column_img"><img src="home/images/add.png"></div>
     <p>添加新地址</p>
@@ -153,6 +154,11 @@
     $(".delete").click(
         function () {
             $(this).parent().remove();
+        }
+    )
+    $(".column_box").click(
+        function () {
+            document.location='address_add?callback='+GetQueryString('callback')
         }
     )
 </script>

@@ -9,6 +9,8 @@ import com.wechatweb.demo.mapper.AppointmentInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,7 +29,11 @@ public class AppointmentInfoService {
     public List findByOpenId(String open_id){
         AppointmentInfo appointmentInfo = new AppointmentInfo();
         appointmentInfo.setOpenid(open_id);
-        return mapper.selectListByOpenId(appointmentInfo);
+        List<AppointmentInfo> result = mapper.selectListByOpenId(appointmentInfo);
+//        for (AppointmentInfo appointment:result) {
+//            appointment.setCreatedtime();stampToDate(appointment.getCreatedtime());
+//        }
+        return result;
     }
 
     //根据id修改信息
@@ -70,5 +76,21 @@ public class AppointmentInfoService {
     //查找全部订单 status
     public List<AppointmentInfo> findALLOrders(AppointmentInfo entity) {
         return mapper.selectListByOpenId(entity);
+    }
+
+    public static String stampToDate(Long s){
+
+        String res;
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        long lt = new Long(s);
+
+        Date date = new Date(lt);
+
+        res = simpleDateFormat.format(date);
+
+        return res;
+
     }
 }

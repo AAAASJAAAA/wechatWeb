@@ -259,26 +259,27 @@
             },
             success:function(formData){
                 console.log(formData)
-                var status0 = ''
-                var status1 = ''
+                var status0 = '<br>'
+                var status1 = '<br>'
+                debugger
                 for(var index in formData) {
-                    if(formData[index].status == 1 || formData[index].status == 2)
+                    console.log(formData[index].status)
+                    if(formData[index].status == "1" || formData[index].status == "2")
                     {
+                        console.log(1)
                         var status ="";
-                        if(formData[index].status == "1") {status = "已接单"}else{status = "正在受理中"}
+                        if(formData[index].status == "1") {status = "已接单"}else{status = "受理中"}
                         status0 += '<div class="order"><div class="border_top"></div><div class="order_title">家庭宽带预登记</div><div class="order_text"><div class="border_top"></div><h1>'+formData[index].appointmenttime+'</h1><h2>'+formData[index].address+'</h2><div class="border_bottom"></div></div><div class="cancel" style="border:#ff7f00 1px solid; color:#ff7f00;">'+status+'</div><div class="border_bottom"></div></div>'
                     }else {
+                        console.log(3)
                         var status ="";
-                        if(formData[index].status == "3") {status = "已受理成功"}else{status = "已取消"}
+                        if(formData[index].status == "3") {status = "受理成功"}else{status = "已取消"}
                         status1 += '<div class="order"><div class="border_top"></div><div class="order_title">家庭宽带预登记</div><div class="order_text"><div class="border_top"></div><h1>'+formData[index].appointmenttime+'</h1><h2>'+formData[index].address+'</h2><div class="border_bottom"></div></div><div class="cancel" style="border:#ff7f00 1px solid; color:#ff7f00;">'+status+'</div><div class="border_bottom"></div></div>'
                     }
                 };
 
                 $("#status0").html(status0);
                 $("#status1").html(status1);
-
-                // $("#headimgurl").attr('src',formData.headimgurl);
-                // $("#nickname").html(formData.nickname);
             },
             error:function(){
                 alert('error'); //错误的处理

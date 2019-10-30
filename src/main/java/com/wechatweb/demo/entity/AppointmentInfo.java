@@ -37,4 +37,7 @@ public class AppointmentInfo {
     @TableField(exist = false)
     //客户身份证号
     private String chinaid;
+
+    @TableField(exist = false)
+    private String address;
 }

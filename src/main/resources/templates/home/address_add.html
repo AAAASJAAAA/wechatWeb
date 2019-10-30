@@ -1,21 +1,28 @@
 <!doctype html>
 <html>
 <head>
-<script src="home/js/jquery.js"></script>
-<link href="home/css/css.css" rel="stylesheet" type="text/css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<meta name="format-detection" content="telephone=no" />
-<meta charset="utf-8">
-<title>无标题文档</title>
-<style>
-/*地址输入框*/
-.column_box input{ line-height:46px; color:#191919; font-size:14px; float:left; margin-left:12px;}
-</style>
+    <script src="home/js/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <link href="home/css/css.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta charset="utf-8">
+    <title>无标题文档</title>
+    <style>
+        /*地址输入框*/
+        .column_box input {
+            line-height: 46px;
+            color: #191919;
+            font-size: 14px;
+            float: left;
+            margin-left: 12px;
+        }
+    </style>
 </head>
 <body style="background-color: #f9f9f9;">
 <!--header顶部标题-->
 <div class="header">添加服务地址
-	<div class="header_left" onclick="window.history.go(-1)"><img src="home/images/return.png"></div>
+    <div class="header_left" onclick="javascript:window.location.href='/'"><img src="home/images/return.png"></div>
 </div>
 <!--&lt;!&ndash;column搜索小区&ndash;&gt;-->
 <!--<div class="column_box" onclick="document.location='address_search.html';">-->
@@ -27,44 +34,95 @@
 <!--</div>-->
 <!--column详细地址-->
 <div class="column_box">
-	<div class="column_img"><img src="home/images/adrress_2.png"></div>
-    <input placeholder="详细地址，如xx小区xx号楼xx单元xx室"></input>
+    <div class="column_img"><img src="home/images/adrress_2.png"></div>
+    <input id="address" placeholder="详细地址，如xx小区xx号楼xx单元xx室"></input>
     <div class="border_bottom"></div>
 </div>
 <!--acreage面积-->
 
 <!--column联系人-->
 <div class="column_box">
-	<div class="column_img"><img src="home/images/people.png"></div>
-    <input placeholder="联系人"></input>
+    <div class="column_img"><img src="home/images/people.png"></div>
+    <input id="name" placeholder="联系人"></input>
     <div class="border_bottom"></div>
 </div>
 <!--column电话-->
 <div class="column_box">
-	<div class="column_img"><img src="home/images/phone.png"></div>
-    <input placeholder="联系电话" type="number"></input>
+    <div class="column_img"><img src="home/images/phone.png"></div>
+    <input id="phonenumber" placeholder="联系电话" type="number"></input>
     <div class="border_bottom"></div>
 </div>
 <!--column身份证-->
 <div class="column_box">
     <div class="column_img"><img src="home/images/phone.png"></div>
-    <input placeholder="身份证"></input>
+    <input id="chinaid" placeholder="身份证"></input>
     <div class="border_bottom"></div>
 </div>
 
 <!--confirm确认添加-->
-	<div class="confirm">确认添加</div>
+<div id="button" class="confirm">确认添加</div>
 <script>
-var i=0;
-var x=0;
-$(".area_box").click(function(){//点击下拉列表
-	
-	if(i==0){$(".area_box").animate({height:'187px'});i=1}else{$(".area_box").animate({height:'32px'}); i=0}//显示隐藏选项
-	})
-$(".box").click(function(){//点击选项：切换背景颜色
-	$(this).css("background-color","#CCCCCC").siblings().css("background-color","#fff");
-	$(".chenge").html($(this).html());//点击选项：替换文本
-	})	
+
+    function GetQueryString(name)
+    {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+
+    setInterval(function () {
+        var address = $("#address").val()
+        var name = $("#name").val()
+        var phonenumber = $("#phonenumber").val()
+        var chinaid = $("#chinaid").val()
+        if (address != '' && name != '' && phonenumber != '' && chinaid != '') {
+            $(".confirm").css("background-color", "#FF7F00")
+        }
+    }, 100)
+
+
+    $("#button").click(
+        function () {
+            var address = $("#address").val()
+            var name = $("#name").val()
+            var phonenumber = $("#phonenumber").val()
+            var chinaid = $("#chinaid").val()
+            if (address != '' && name != '' && phonenumber != '' && chinaid != '') {
+                $.ajax({
+                    url: "/apponitment/addAddress",
+                    type: "POST",
+                    contentType: 'application/x-www-form-urlencoded',
+                    async: false,//同步，异步
+                    data: {
+                        openid: $.cookie('openid'),
+                        address: address,
+                        name: name,
+                        phonenumber: phonenumber,
+                        chinaid: chinaid
+                    },
+                    success: function (formData) {
+                        alert(formData)
+                        window.location.href = "/address?callback=" +GetQueryString('callback')
+                    },
+                    error: function () {
+                        alert('error'); //错误的处理
+                    }
+                });
+            } else {
+                // alert('请填写完整信息后提交订单！')
+            }
+        });
+
+    // var i=0;
+    // var x=0;
+    // $(".area_box").click(function(){//点击下拉列表
+    //
+    // 	if(i==0){$(".area_box").animate({height:'187px'});i=1}else{$(".area_box").animate({height:'32px'}); i=0}//显示隐藏选项
+    // 	})
+    // $(".box").click(function(){//点击选项：切换背景颜色
+    // 	$(this).css("background-color","#CCCCCC").siblings().css("background-color","#fff");
+    // 	$(".chenge").html($(this).html());//点击选项：替换文本
+    // 	})
 </script>
 </body>
 </html>

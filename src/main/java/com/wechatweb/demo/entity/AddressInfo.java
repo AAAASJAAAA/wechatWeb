@@ -7,9 +7,9 @@ import lombok.Data;
 @Data
 @TableName(value = "address_info")
 public class AddressInfo {
+
     @TableId(value = "id")
     private String id;
-
     //公众号分配微信ID
     private String openid;
 

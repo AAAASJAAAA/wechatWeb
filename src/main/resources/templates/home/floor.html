@@ -435,7 +435,7 @@
 <!--</div>-->
 <!--confirm提交订单-->
 <div class="confirm_box">
-    <div class="confirm">提交订单</div>
+    <div class="confirm" id="button">提交订单</div>
 </div>
 <!--免责声明-->
 <div class="black" id="black"></div>
@@ -564,39 +564,70 @@
     </div>
 </div>
 <script>
-    function GetQueryString(name)
-    {
-        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+
+
+    $("#button").click(
+        function () {
+            var id = $("#addressId").val()
+            var time = $("#atext").html()
+            var time1 = $("#time").html()
+            if (id != '' && time != '请选择服务时间') {
+                $.ajax({
+                    url: "/apponitment/insert",
+                    type: "POST",
+                    contentType: 'application/x-www-form-urlencoded',
+                    async: false,//同步，异步
+                    data: {
+                        openid: $.cookie('openid'),
+                        addressid: $("#addressId").val(),
+                        appointmenttime:time.replace("<p>","").replace("</p>","") + " " + time1
+                    },
+                    success: function (formData) {
+                        alert(formData)
+                        window.location.href = "/"
+                    },
+                    error: function () {
+                        alert('error'); //错误的处理
+                    }
+                });
+            }else{
+                // alert('请填写完整信息后提交订单！')
+            }
+        });
+
+    function GetQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
-        if(r!=null)return  unescape(r[2]); return null;
+        if (r != null) return unescape(r[2]);
+        return null;
     }
+
     setInterval(function () {
         var id = $("#addressId").val()
-        console.log(id)
-        if (id != '') {
+        var time = $("#atext").html()
+        if (id != '' && time != '请选择服务时间') {
             $(".confirm").css("background-color", "#FF7F00")
         }
     }, 100)
 
     $().ready(function () {
         var address_id = GetQueryString('address_id')
-        if (address_id != null)
-        {
+        if (address_id != null) {
             $.ajax({
                 url: "/apponitment/findAddressInfo",
                 type: "POST",
                 contentType: 'application/x-www-form-urlencoded',
-                async:false,//同步，异步
-                data:{
-                    openid:$.cookie('openid'),
-                    id:GetQueryString('address_id')
+                async: false,//同步，异步
+                data: {
+                    openid: $.cookie('openid'),
+                    id: GetQueryString('address_id')
                 },
-                success:function(formData){
+                success: function (formData) {
                     console.log(formData)
                     $("#address").html(formData.address);
                     $("#addressId").val(formData.id)
                 },
-                error:function(){
+                error: function () {
                     alert('error'); //错误的处理
                 }
             });
@@ -607,8 +638,8 @@
 
     $("#column_box").click(
         function () {
-            window.location.href="/address?callback="+window.location.pathname;
-    })
+            window.location.href = "/address?callback=" + window.location.pathname;
+        })
     //隐藏免责声明、资费介绍
     document.getElementById('black').style.display = "none";
     document.getElementById('statement').style.display = "none";
@@ -711,7 +742,7 @@
     for (x = 0; x < time.length; x++) {
         time[x].index = x;
         time[x].onclick = function () {
-            btext.innerHTML = "<span>" + arr[this.index] + "</span>";
+            btext.innerHTML = "<span id='time'>" + arr[this.index] + "</span>";
         }
     }
 

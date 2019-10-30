@@ -3,7 +3,12 @@
 <mapper namespace="com.wechatweb.demo.mapper.AppointmentInfoMapper">
     <select id="selectListByOpenId" parameterType="com.wechatweb.demo.entity.AppointmentInfo" resultType="com.wechatweb.demo.entity.AppointmentInfo">
         SELECT
-            a.*,
+            a.id,
+            a.openid,
+            a.addressid,
+            a.appointmenttime,
+            a.status,
+            FROM_UNIXTIME(a.createdtime),
             b.address,
             b.name,
             b.phonenumber,

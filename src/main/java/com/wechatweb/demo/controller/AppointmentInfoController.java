@@ -45,7 +45,7 @@ public class AppointmentInfoController {
         try {
             UUID id = UUID.randomUUID();
             entity.setId(id.toString().replace("-",""));
-            entity.setCreatedtime(Calendar.getInstance().getTimeInMillis());
+            entity.setCreatedtime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
             entity.setStatus(Constant.APPOINTMENT_STATUS_GOTED);
             appointmentInfoService.insertAppointmentInfo(entity);
             return "预约成功，客服将于10分钟之内联系您，谢谢配合。";

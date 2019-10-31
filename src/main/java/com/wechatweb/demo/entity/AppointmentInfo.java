@@ -24,7 +24,7 @@ public class AppointmentInfo {
     private String status;
 
     //创建时间
-    private Long createdtime;
+    private String createdtime;
 
     @TableField(exist = false)
     //客户姓名

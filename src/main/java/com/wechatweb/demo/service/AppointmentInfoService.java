@@ -30,9 +30,10 @@ public class AppointmentInfoService {
         AppointmentInfo appointmentInfo = new AppointmentInfo();
         appointmentInfo.setOpenid(open_id);
         List<AppointmentInfo> result = mapper.selectListByOpenId(appointmentInfo);
-//        for (AppointmentInfo appointment:result) {
-//            appointment.setCreatedtime();stampToDate(appointment.getCreatedtime());
-//        }
+        for (AppointmentInfo appointment:result) {
+            Long time = Long.valueOf(appointment.getCreatedtime());
+            appointment.setCreatedtime(stampToDate(time));
+        }
         return result;
     }
 

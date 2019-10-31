@@ -8,7 +8,7 @@
             a.addressid,
             a.appointmenttime,
             a.status,
-            FROM_UNIXTIME(a.createdtime),
+            a.createdtime,
             b.address,
             b.name,
             b.phonenumber,

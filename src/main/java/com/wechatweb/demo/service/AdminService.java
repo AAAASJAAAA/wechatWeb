@@ -1,20 +1,12 @@
 package com.wechatweb.demo.service;
 
-import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
-import com.wechatweb.demo.constant.Constant;
-import com.wechatweb.demo.entity.AddressInfo;
-import com.wechatweb.demo.entity.AppointmentInfo;
 import com.wechatweb.demo.entity.admin;
-import com.wechatweb.demo.mapper.AddressInfoMapper;
 import com.wechatweb.demo.mapper.AdminMapper;
-import com.wechatweb.demo.mapper.AppointmentInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class AdminService {

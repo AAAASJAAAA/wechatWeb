@@ -3,7 +3,6 @@ package com.wechatweb.demo.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Slf4j
@@ -45,5 +44,11 @@ public class indexController {
     @RequestMapping("/index_center")
     public String mine(){
         return "home/index_center";
+    }
+
+    //拼多多
+    @RequestMapping("/pdd")
+    public String pdd(){
+        return "home/pdd";
     }
 }

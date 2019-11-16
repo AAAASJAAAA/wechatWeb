@@ -24,4 +24,7 @@ public class AddressInfo {
 
     //客户身份证号
     private String chinaid;
+
+    //备注
+    private String remarks;
 }

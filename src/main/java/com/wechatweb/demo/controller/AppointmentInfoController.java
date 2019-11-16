@@ -82,10 +82,9 @@ public class AppointmentInfoController {
 
     //预约完成（商家）
     @RequestMapping(value = "/finished", method = RequestMethod.POST)
-    public String finished(AppointmentInfo entity) {
+    public Object finished(String id) {
         try {
-            appointmentInfoService.finished(entity);
-            return "执行成功";
+            return appointmentInfoService.finished(id);
         } catch (Exception e) {
             log.error(e.getMessage());
             return "执行失败，请联系管理员！";
@@ -94,11 +93,9 @@ public class AppointmentInfoController {
 
     //（商家）接单
     @RequestMapping(value = "/ordered", method = RequestMethod.POST)
-    public String ordered(AppointmentInfo entity) {
+    public Object ordered(String id) {
         try {
-            entity.setStatus(Constant.APPOINTMENT_STATUS_NOT_FINISHED);
-            appointmentInfoService.updateById(entity);
-            return "执行成功";
+            return appointmentInfoService.ordered(id);
         } catch (Exception e) {
             log.error(e.getMessage());
             return "执行失败，请联系管理员！";

@@ -35,7 +35,7 @@
 <!--column详细地址-->
 <div class="column_box">
     <div class="column_img"><img src="home/images/adrress_2.png"></div>
-    <input id="address" placeholder="详细地址，如xx小区xx号楼xx单元xx室"></input>
+    <input id="address" placeholder="详细地址，如xx小区xx号楼xx单元xx室(必填)"></input>
     <div class="border_bottom"></div>
 </div>
 <!--acreage面积-->
@@ -43,19 +43,26 @@
 <!--column联系人-->
 <div class="column_box">
     <div class="column_img"><img src="home/images/people.png"></div>
-    <input id="name" placeholder="联系人"></input>
+    <input id="name" placeholder="联系人(必填)"></input>
     <div class="border_bottom"></div>
 </div>
 <!--column电话-->
 <div class="column_box">
     <div class="column_img"><img src="home/images/phone.png"></div>
-    <input id="phonenumber" placeholder="联系电话" type="number"></input>
+    <input id="phonenumber" placeholder="联系电话(必填)" type="number"></input>
     <div class="border_bottom"></div>
 </div>
 <!--column身份证-->
 <div class="column_box">
     <div class="column_img"><img src="home/images/phone.png"></div>
-    <input id="chinaid" placeholder="身份证"></input>
+    <input id="chinaid" placeholder="身份证(选填)"></input>
+    <div class="border_bottom"></div>
+</div>
+
+<!--column身份证-->
+<div class="column_box">
+    <div class="column_img"><img src="home/images/phone.png"></div>
+    <input id="remarks" placeholder="备注(选填)"></input>
     <div class="border_bottom"></div>
 </div>
 
@@ -75,7 +82,7 @@
         var name = $("#name").val()
         var phonenumber = $("#phonenumber").val()
         var chinaid = $("#chinaid").val()
-        if (address != '' && name != '' && phonenumber != '' && chinaid != '') {
+        if (address != '' && name != '' && phonenumber != '') {
             $(".confirm").css("background-color", "#FF7F00")
         }
     }, 100)
@@ -87,18 +94,20 @@
             var name = $("#name").val()
             var phonenumber = $("#phonenumber").val()
             var chinaid = $("#chinaid").val()
-            if (address != '' && name != '' && phonenumber != '' && chinaid != '') {
+            var remarks = $("#remarks").val()
+            if (address != '' && name != '' && phonenumber != '') {
                 $.ajax({
                     url: "/apponitment/addAddress",
                     type: "POST",
                     contentType: 'application/x-www-form-urlencoded',
-                    async: false,//同步，异步
+                    async: true,//同步，异步
                     data: {
                         openid: $.cookie('openid'),
                         address: address,
                         name: name,
                         phonenumber: phonenumber,
-                        chinaid: chinaid
+                        chinaid: chinaid,
+                        remarks: remarks,
                     },
                     success: function (formData) {
                         alert(formData)

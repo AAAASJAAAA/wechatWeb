@@ -17,7 +17,7 @@ public class AdminController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String login(admin entity){
+    public Object login(admin entity){
         try {
             return adminService.login(entity);
         }

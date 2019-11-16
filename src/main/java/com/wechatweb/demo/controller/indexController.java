@@ -51,4 +51,14 @@ public class indexController {
     public String pdd(){
         return "home/pdd";
     }
+
+    @RequestMapping("/admin")
+    public String adminLogin(){
+        return "backstage/login";
+    }
+
+    @RequestMapping("/main")
+    public String adminMain(){
+        return "backstage/main";
+    }
 }

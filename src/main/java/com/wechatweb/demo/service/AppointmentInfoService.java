@@ -1,5 +1,8 @@
 package com.wechatweb.demo.service;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import com.wechatweb.demo.constant.Constant;
 import com.wechatweb.demo.entity.AddressInfo;
 import com.wechatweb.demo.entity.AppointmentInfo;
@@ -38,8 +41,19 @@ public class AppointmentInfoService {
     }
 
     //根据id修改信息
-    public void updateById(AppointmentInfo entity){
-        mapper.updateById(entity);
+    public Object ordered(String id){
+        AppointmentInfo entity = new AppointmentInfo();
+        JSONObject jsonObject = new JSONObject();
+        entity = mapper.selectById(id);
+        if (entity.getStatus().equals(Constant.APPOINTMENT_STATUS_GOTED)){
+            entity.setId(id);
+            entity.setStatus(Constant.APPOINTMENT_STATUS_NOT_FINISHED);
+            mapper.updateById(entity);
+            jsonObject.put("msg" , "业务执行成功");
+            return jsonObject;
+        }
+//        jsonObject.put("msg" , "业务执行失败");
+        return null;
     }
 
     //根据id取消预约
@@ -48,10 +62,25 @@ public class AppointmentInfoService {
         mapper.updateById(entity);
     }
 
-    //预约上门完成
-    public void finished(AppointmentInfo entity){
-        entity.setStatus(Constant.APPOINTMENT_STATUS_FINISHED);
+    //根据id
+    public void updateById(AppointmentInfo entity){
         mapper.updateById(entity);
+    }
+
+    //预约上门完成
+    public Object finished(String id){
+        AppointmentInfo entity = new AppointmentInfo();
+        JSONObject jsonObject = new JSONObject();
+        entity = mapper.selectById(id);
+        if (entity.getStatus().equals(Constant.APPOINTMENT_STATUS_NOT_FINISHED)){
+            entity.setId(id);
+            entity.setStatus(Constant.APPOINTMENT_STATUS_FINISHED);
+            mapper.updateById(entity);
+            jsonObject.put("msg" , "业务执行成功");
+            return jsonObject;
+        }
+//        jsonObject.put("msg" , "业务执行失败");
+        return null;
     }
 
     //新增地址
@@ -76,7 +105,8 @@ public class AppointmentInfoService {
     }
     //查找全部订单 status
     public List<AppointmentInfo> findALLOrders(AppointmentInfo entity) {
-        return mapper.selectListByOpenId(entity);
+        List<AppointmentInfo> result = mapper.selectListByOpenId(entity);
+        return result;
     }
 
     public static String stampToDate(Long s){

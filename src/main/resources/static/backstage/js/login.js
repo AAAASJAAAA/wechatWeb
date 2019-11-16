@@ -3,7 +3,7 @@ login = {
         var inputstuid = $("#stuid").val();
         var inputpassword = $("#password").val();
         if (inputstuid.length == 0) {
-            login.showNotification("StuID Can`t Be Empty",'top','center')
+            login.showNotification("Code Can`t Be Empty",'top','center')
             return;
         } else if (inputpassword.length == 0) {
             login.showNotification("Password Can't Be Empty!",'top','center')
@@ -12,33 +12,22 @@ login = {
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "/login",
+                url: "/admin/login",
                 async: false,
-                data: {"stuid": inputstuid, "password": inputpassword},
+                data: {"code": inputstuid, "password": inputpassword},
                 success: function (result) {
-                    if(result.msg == "not have this stuid"){
-                        login.showNotification(result.msg,'top','center');
-                        $("#stuid").val("")
-                        $("#password").val("");
-                        $("#stuid").focus();
-                    }
-                    else if(result.msg == "password error"){
+                    console.log(result)
+                    if(result.msg == "用户名或密码错误"){
                         login.showNotification(result.msg,'top','center');
                         $("#password").val("");
                         $("#password").focus();
                     }
-                    else if (result.msg == "login failed"){
-                        login.showNotification(result.msg,'top','center');
-                        $("#stuid").val("")
-                        $("#password").val("");
-                        $("#stuid").focus();
-                    }
-                    else if (result.msg == "login success") {
+                    else if(result.msg = "登录成功"){
                         var cookiedate = new Date();
                         cookiedate.setTime(cookiedate.getTime() + 5 * 60 * 1000);
                         $.cookie("token",result.token,{expires: cookiedate,path:"/",domain:window.DomainName});
-                        $.cookie("stuid",result.stuid,{expires: cookiedate,path:"/",domain:window.DomainName});
-                        window.location.href = "student";
+                        $.cookie("code",result.code,{expires: cookiedate,path:"/",domain:window.DomainName});
+                        window.location.href = "/main";
                     }
                 },
                 error: function () {

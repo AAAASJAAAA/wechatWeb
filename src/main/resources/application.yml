@@ -43,3 +43,6 @@ mybatis-plus:
     db-column-underline: true
     #是否动态刷新mapper
     refresh-mapper: false
+wechat:
+  app-id: wx08988f2cc05f7950
+  appsecret: 80ca16ce870d1ff3c661e65c74522bcc

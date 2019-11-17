@@ -1,5 +1,6 @@
 package com.wechatweb.demo.controller;
 
+import com.wechatweb.demo.config.WechatConf;
 import com.wechatweb.demo.constant.Constant;
 import com.wechatweb.demo.entity.AddressInfo;
 import com.wechatweb.demo.entity.AppointmentInfo;
@@ -23,9 +24,11 @@ import java.util.UUID;
 public class AppointmentInfoController {
     @Autowired
     AppointmentInfoService appointmentInfoService;
-
     @Autowired
     WechatUserInfoService wechatUserInfoService;
+    @Autowired
+    private WechatConf wechatConf;
+
     //根据openid查询预约列表
     @RequestMapping(value = "/page", method = RequestMethod.POST)
     public List findMyAppointmentList(String openid) {
@@ -47,8 +50,8 @@ public class AppointmentInfoController {
             entity.setId(id.toString().replace("-",""));
             entity.setCreatedtime(String.valueOf(Calendar.getInstance().getTimeInMillis()));
             entity.setStatus(Constant.APPOINTMENT_STATUS_GOTED);
-
             appointmentInfoService.insertAppointmentInfo(entity);
+            wechatUserInfoService.sendMessage("cXmJiOI1Wf8vMRpkf9tuDhTdpMpzftGN3ZYh89ctHeE","oRgAbuH5hBeHgloX016pMmOuCRAM",wechatConf.Local_host+"/main");
             return "预约成功，客服将于10分钟之内联系您，谢谢配合。";
         } catch (Exception e) {
             log.error(e.getMessage());

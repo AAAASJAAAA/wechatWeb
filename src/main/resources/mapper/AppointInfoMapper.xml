@@ -24,6 +24,8 @@
                 AND a.status = '${status}'
             </if>
         </where>
+        ORDER BY
+            a.createdtime DESC
     </select>
 
     <select id="findALLOrders" parameterType="com.wechatweb.demo.entity.AppointmentInfo" resultType="com.wechatweb.demo.entity.AppointmentInfo">

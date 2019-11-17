@@ -33,12 +33,8 @@ import java.text.SimpleDateFormat;
 @Controller
 @RequestMapping("/wxAuth")
 public class WxLoginController {
-//    final private String appID = "wx08988f2cc05f7950";
-//    final private String appsecret = "80ca16ce870d1ff3c661e65c74522bcc";
     @Autowired
     WechatUserInfoService wechatUserInfoService;
-    @Autowired
-    private RestTemplate restTemplate;
     @Autowired
     private WechatConf wechatConf;
 
@@ -68,25 +64,7 @@ public class WxLoginController {
         }
     }
 
-    @RequestMapping("/sendMessage")
-    @ResponseBody
-    public Object sendMessage() {
-        MessageTemplate messageTemplate = new MessageTemplate();
-        // 设置模板id
-        messageTemplate.setTemplateId("cXmJiOI1Wf8vMRpkf9tuDhTdpMpzftGN3ZYh89ctHeE");
-        // 设置接收用户openId
-        messageTemplate.setToUser("oRgAbuNFcOq0FoFYIKzEI6FVY1lc");
-        //点击详情跳转的地址
-        messageTemplate.setUrl("http://www.baidu.com");
 
-        //设置模板dada参数
-        messageTemplate.getData().put("topic", MessageTemplate.initData("您有新的订单了，请及时查看！\n", ""));
-        messageTemplate.getData().put("remark", MessageTemplate.initData("请点击查看", ""));
-        //调用微信接口，发送模板消息
-        Result result = restTemplate.postForObject(String.format(WechatConf.PUSH_MESSAGE_URL, wechatConf.getAccessToken()),
-                messageTemplate, Result.class);
-        return result;
-    }
 
 
     @RequestMapping("/login")

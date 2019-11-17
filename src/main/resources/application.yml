@@ -21,7 +21,7 @@ spring:
 
 #设置自己启动的端口
 server:
-  port: 5000
+  port: 80
   address: 0.0.0.0
 
 
@@ -46,3 +46,4 @@ mybatis-plus:
 wechat:
   app-id: wx08988f2cc05f7950
   appsecret: 80ca16ce870d1ff3c661e65c74522bcc
+
